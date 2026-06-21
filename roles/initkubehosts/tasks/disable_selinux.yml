@@ -1,0 +1,17 @@
+# - name: Install libselinux-python (yum). Required for many tasks package in Centos 6
+#   tags:
+#     - install
+#   yum: 
+#     name: libselinux-python
+#     state: installed
+#   when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 6
+- name: Disabling selinux
+  tags: 
+    - install
+    - configure
+  selinux: 
+    state: disabled
+  when: ( ansible_selinux.status is defined ) and ( ansible_selinux.status != "disabled" )
+  # notify: selinux_disabling_notify
+  register: selinux_disabling_status
+  changed_when: ( selinux_disabling_status.reboot_required is defined and selinux_disabling_status.reboot_required ) or selinux_disabling_status.changed

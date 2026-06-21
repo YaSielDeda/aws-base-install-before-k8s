@@ -1,0 +1,68 @@
+- name: Uncomment ssh alive interval
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '#ClientAliveInterval 0'
+    line: 'ClientAliveInterval 300'
+  tags:
+    - install
+    - configure
+- name: Uncomment ssh alive count max
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '#ClientAliveCountMax 3'
+    line: 'ClientAliveCountMax 3'
+  tags:
+    - install
+    - configure
+- name: GSSAPIAuthentication disable
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: 'GSSAPIAuthentication yes'
+    line: 'GSSAPIAuthentication no'
+  tags:
+    - install
+    - configure
+- name: Restart sshd service
+  become: yes
+  service:
+    name: sshd
+    state: restarted
+  tags:
+    - install
+    - configure
+# - name: Verify OS requirements
+#   assert:
+#     that:
+#       - ansible_distribution in ['OracleLinux']
+#       - ansible_distribution_major_version|int in [8, 9]
+#     success_msg: "This role is for Oracle linux only.All is good! Your OS version is {{ ansible_distribution }}"
+#     fail_msg: "Your OS {{ ansible_distribution }} is not supported"
+#   tags:
+#     - install
+#     - configure
+#   ignore_errors: yes 
+# - name: Yum  remove unnecessary packages
+#   yum:
+#     name: "{{ remove_packages }}"
+#     state: absent
+#   tags:
+#     - install
+#     - configure
+- name: Setting the account expiration date
+  become: yes
+  user:
+    name: ansible
+    password_expire_min: 0
+    password_expire_max: 99999
+    expires: -1
+  tags:
+    - install
+    - configure
+- name: Get status services
+  service_facts:
+  tags:
+    - install
+    - configure

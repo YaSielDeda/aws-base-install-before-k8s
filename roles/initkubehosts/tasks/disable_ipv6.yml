@@ -1,0 +1,10 @@
+- name: Disable ipv6 in default
+  tags:
+    - install
+    - configure
+  sysctl: name=net.ipv6.conf.default.disable_ipv6 value=1 sysctl_set=yes sysctl_file=/etc/sysctl.conf
+- name: Disable ipv6 in all interface
+  tags:
+    - install
+    - configure
+  sysctl: name=net.ipv6.conf.all.disable_ipv6 value=1 sysctl_set=yes sysctl_file=/etc/sysctl.conf

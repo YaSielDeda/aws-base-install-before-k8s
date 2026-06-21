@@ -1,0 +1,10 @@
+- name: set cronjob for clearing old docker images
+  tags:
+    - install
+    - configure
+  cron:
+    name: clear docker images
+    minute: "15"
+    hour: "3"
+    day: "*/2"
+    job: "/usr/local/bin/crictl rmi --prune"

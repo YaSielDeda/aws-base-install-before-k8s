@@ -1,0 +1,6 @@
+---
+- name: Jobs for prepare k8s nodes before install
+  hosts: all
+  become: true
+  roles:
+    - initkubehosts

@@ -1,0 +1,18 @@
+---
+- name: common_seetings
+  import_tasks: common_settings.yml
+
+- name: containerd_clearing
+  import_tasks: containerd_clearing.yml
+
+- name: disable_firewall
+  import_tasks: disable_firewall.yml
+
+- name: disable_ipv6
+  import_tasks: disable_ipv6.yml
+
+- name: disable_selinux
+  import_tasks: disable_selinux.yml
+
+- name: disable_swap
+  import_tasks: disable_swap.yml
