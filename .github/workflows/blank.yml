@@ -19,4 +19,4 @@ jobs:
           
       - name: Run Ansible Playbook
         run: |
-          ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml -t install playbook.yml --private-key=~/.ssh/id_rsa
+          ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml -t install playbook.yml --private-key=~/.ssh/id_rsa --limit=bastion
