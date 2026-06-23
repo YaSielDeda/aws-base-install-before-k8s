@@ -2,3 +2,31 @@ all: # keys must be unique, i.e. only one 'hosts' per group
   hosts:
     localhost:
       ansible_connection: local
+
+all:
+  vars:
+    #ansible_user: ansible
+    
+    # Магия: говорим Ansible пускать весь трафик к серверам через бастион
+    #ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ubuntu@{{ hostvars[\'bastion\'][\'ansible_host\'] }}"'
+
+  hosts:
+    bastion:
+      ansible_host: 51.20.248.3  # <-- Сюда публичный IP бастиона
+      # Для самого бастиона прокси-команда не нужна, отключаем её локально
+      ansible_ssh_common_args: ''
+
+  # Группируем ваши ноды по назначению
+  children:
+    k8s_masters:
+      hosts:
+        master1:
+          ansible_host: 10.0.0.15  # <-- Приватный IP из subnet 0
+
+    k8s_workers:
+      hosts:
+        worker1:
+          ansible_host: 10.0.0.42  # <-- Приватный IP из subnet 0
+          
+        worker2:
+          ansible_host: 10.0.0.99  # <-- Приватный IP из subnet 0
