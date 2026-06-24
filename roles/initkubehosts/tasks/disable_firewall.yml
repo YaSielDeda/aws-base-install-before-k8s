@@ -12,7 +12,7 @@
     - install
     - configure
   service:
-    name: NetworkManager
+    name: systemd-networkd
     state: stopped
     enabled: false
   when: (ansible_facts['distribution'] != "OracleLinux")
