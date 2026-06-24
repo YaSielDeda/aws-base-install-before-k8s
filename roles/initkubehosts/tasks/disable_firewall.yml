@@ -1,9 +1,9 @@
-- name: Ensure firewalld stopped and disabled
+- name: Ensure ufw stopped and disabled
   tags:
     - install
     - configure
   service:
-    name: firewalld
+    name: ufw
     state: stopped
     enabled: false
 #OMNI-7941 Added when condition to exclude Oracle Linux distros, due to them usuing NetworkManager as the default network service
