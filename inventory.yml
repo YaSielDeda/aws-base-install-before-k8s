@@ -1,6 +1,6 @@
 all:
   vars:
-    #ansible_user: ansible
+    ansible_user: ubuntu
     
     # Магия: говорим Ansible пускать весь трафик к серверам через бастион
     #ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ubuntu@{{ hostvars[\'bastion\'][\'ansible_host\'] }}"'
