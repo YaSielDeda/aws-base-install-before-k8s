@@ -7,7 +7,7 @@ all:
 
   hosts:
     bastion:
-      ansible_host: 13.60.69.19  # <-- Сюда публичный IP бастиона
+      ansible_host: 13.51.55.61  # <-- Сюда публичный IP бастиона
       # Для самого бастиона прокси-команда не нужна, отключаем её локально
       ansible_ssh_common_args: ''
     localhost:
